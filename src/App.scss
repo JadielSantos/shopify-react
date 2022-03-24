@@ -1,0 +1,21 @@
+//import bootstrap variables and functions
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+//change bootstrap theme colors
+$theme-colors: (
+  "primary":   $blue-800,
+  "secondary": $secondary,
+  "success":   $success,
+  "info":      $info,
+  "warning":   $warning,
+  "danger":    $danger,
+  "light":     $light,
+  "dark":      $dark
+);
+
+//import bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+//import all components scss files
+@import 'style/ShopifyReact';
