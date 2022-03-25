@@ -27,13 +27,21 @@ class ShopProvider extends Component {
     this.setState({checkout: checkout})
   }
 
-  additemToCheckout = async (variantId, quantity) => {
-    const lineItemsToAdd = [{
+  addItemToCheckout = async (variantId, quantity) => {
+    const checkout = await client.checkout.addLineItems(this.state.checkout.id, [{
       variantId,
       quantity: parseInt(quantity, 10)
-    }]
+    }]);
 
-    const checkout = await client.checkout.addLineItems(this.state.checkout.id, lineItemsToAdd);
+    this.setState({checkout: checkout})
+  }
+
+  updateItemInCheckout = async (lineItemId, quantity) => {
+    const checkout = await client.checkout.updateLineItems(this.state.checkout.id, [{ 
+      id: lineItemId, 
+      quantity: parseInt(quantity, 10) 
+    }]);
+
     this.setState({checkout: checkout})
   }
 
@@ -63,7 +71,8 @@ class ShopProvider extends Component {
           fetchProductById: this.fetchProductById,
           closeCart: this.closeCart,
           openCart: this.openCart,
-          additemToCheckout: this.additemToCheckout
+          addItemToCheckout: this.addItemToCheckout,
+          updateItemInCheckout: this.updateItemInCheckout
          }}>
         {this.props.children}
       </Shop.Provider>
